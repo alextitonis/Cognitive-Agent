@@ -10,7 +10,7 @@ class detector:
         self.detector.setModelPath(modelPath)
         self.detector.loadModel()
         
-    def detect(self, image_data, image_sizeX, image_sizeY, image_position_to_screen, input_type="array", output_image_path="imagenew.jpg", minPerc=50):
+    def detect(self, image_data, imageWidth, imageLength, image_position_to_screen, input_type="array", output_image_path="imagenew.jpg", minPerc=50):
         #img = Image.open('test.jpg')
         #data = asarray(img)
         #get the size of the image to get the center based on the screen space
@@ -20,8 +20,8 @@ class detector:
             print(eachObject["name"] , " : ", eachObject["percentage_probability"], " : ", eachObject["box_points"] )
             x1, y1, x2, y2 = eachObject["box_points"]
             center = (x1 + x2) / 2, (y1 + y2) / 2
-            rest = image_sizeX - (x1+x2), image_sizeY - (y1+y2)
-            screen_center = image_sizeX / 2, image_sizeY / 2
+            rest = imageWidth - (x1+x2), imageLength - (y1+y2)
+            screen_center = imageWidth / 2, imageLength / 2
             distance = screen_center - center
             if distance < 0: 
                 distance = -distance
