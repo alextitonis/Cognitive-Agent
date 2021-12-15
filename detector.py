@@ -10,19 +10,21 @@ class detector:
         self.detector.setModelPath(modelPath)
         self.detector.loadModel()
         
-    def detect(self, image_data, imageWidth, imageLength, image_position_to_screen, input_type="array", output_image_path="imagenew.jpg", minPerc=50):
+    def detect(self, image_data, input_type="array", output_image_path="imagenew.jpg", minPerc=50):
         #img = Image.open('test.jpg')
         #data = asarray(img)
         #get the size of the image to get the center based on the screen space
         detections = self.detector.detectObjectsFromImage(input_image=image_data, input_type=input_type, output_image_path=output_image_path, minimum_percentage_probability=minPerc)
-    
+        res = []
         for eachObject in detections:
             print(eachObject["name"] , " : ", eachObject["percentage_probability"], " : ", eachObject["box_points"] )
             x1, y1, x2, y2 = eachObject["box_points"]
             center = (x1 + x2) / 2, (y1 + y2) / 2
-            rest = imageWidth - (x1+x2), imageLength - (y1+y2)
-            screen_center = imageWidth / 2, imageLength / 2
-            distance = screen_center - center
-            if distance < 0: 
-                distance = -distance
+            res.append(detectedObject(eachObject["name"], center))
             print("--------------------------------")
+        return res
+    
+class detectedObject:
+    def __init__(self, name, center):
+        self.name = name
+        self.center = center
