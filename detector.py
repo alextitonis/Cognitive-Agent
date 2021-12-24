@@ -1,7 +1,5 @@
 from imageai.Detection import ObjectDetection
 import os
-from PIL import Image
-from numpy import asarray
 
 class detector:
     def __init__(self, modelPath="resnet50_coco_best_v2.1.0.h5"):
@@ -11,9 +9,6 @@ class detector:
         self.detector.loadModel()
         
     def detect(self, image_data, input_type="array", output_image_path="imagenew.jpg", minPerc=50):
-        #img = Image.open('test.jpg')
-        #data = asarray(img)
-        #get the size of the image to get the center based on the screen space
         detections = self.detector.detectObjectsFromImage(input_image=image_data, input_type=input_type, output_image_path=output_image_path, minimum_percentage_probability=minPerc)
         res = []
         for eachObject in detections:
