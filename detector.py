@@ -11,6 +11,7 @@ class detector:
     def detect(self, image_data, input_type="array", output_image_path="imagenew.jpg", minPerc=50):
         detections = self.detector.detectObjectsFromImage(input_image=image_data, input_type=input_type, output_image_path=output_image_path, minimum_percentage_probability=minPerc)
         res = []
+        print('detected:', len(detections), 'objects!');
         for eachObject in detections:
             print(eachObject["name"] , " : ", eachObject["percentage_probability"], " : ", eachObject["box_points"] )
             x1, y1, x2, y2 = eachObject["box_points"]
