@@ -2,7 +2,7 @@ from imageai.Detection import ObjectDetection
 import os
 
 class detector:
-    def __init__(self, modelPath="resnet50_coco_best_v2.1.0.h5"):
+    def __init__(self, modelPath="../resnet50_coco_best_v2.1.0.h5"):
         self.detector = ObjectDetection()
         self.detector.setModelTypeAsRetinaNet()
         self.detector.setModelPath(modelPath)
